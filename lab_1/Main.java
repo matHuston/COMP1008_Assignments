@@ -1,7 +1,6 @@
 package lab_1;
- 
 import java.util.Scanner;
- 
+
 /*
     Week 2 Lab: Weather Report Program
     Topics: Conditional statements, loops, typecasting, input validation
@@ -80,7 +79,6 @@ public class Main {
         */
  
         // TODO: Write if, if-else, or nested if statements to display tips
-        
         if (uvIndex >= 6) {
             weatherTips += "\nHigh UV today; Don't forget sunscreen!";
         } else if (rainInt >= 50) {
@@ -94,14 +92,18 @@ public class Main {
         - Combine all user inputs and tips into one formatted sentence or paragraph
         - Use String concatenation (+) or String.format()
         */
- 
+
         // TODO: Construct your full weather report here
+        String fullReport = String.format("Today's weather is %s with a high of %d°C and a low of %d°C. "
+                + "Precipitation chance is %s%% and wind speed is %s km/h. UV index is %d.%s",
+                weather, highTemp, lowTemp, precipitation, windSpeed, uvIndex, weatherTips);
  
         /*
         STEP 6: Print the full weather report
         */
  
         // TODO: Output your report using System.out.println()
+        System.out.println(fullReport);
  
         /*
         STEP 7: Optional extra challenge
