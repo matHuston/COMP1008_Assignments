@@ -32,6 +32,8 @@ public class Main {
         int uvIndex;
         String weatherTips;
         boolean userInput;
+        String moreReports;
+        boolean inputAgain;
 
         /*
         STEP 2: Get input from the user using Scanner
@@ -109,9 +111,7 @@ public class Main {
         */
 
         // TODO: Construct your full weather report here
-            String fullReport = String.format("Today's weather is %s with a high of %d°C and a low of %d°C. "
-                    + "Precipitation chance is %s%% and wind speed is %s km/h. UV index is %d.%s",
-                    weather, highTemp, lowTemp, precipitation, windSpeed, uvIndex, weatherTips);
+        String fullReport = String.format("Today's weather is %s with a high of %d°C and a low of %d°C. " + "Precipitation chance is %s%% and wind speed is %s km/h. UV index is %d.%s", weather, highTemp, lowTemp, precipitation, windSpeed, uvIndex, weatherTips);
  
         /*
         STEP 6: Print the full weather report
@@ -125,7 +125,7 @@ public class Main {
         - Use loops to ask if the user wants to enter another day's report
         - Continue until the user types "no"
         */
- 
+       
         // TODO: Implement loop for multiple reports
         input.close();
     }
