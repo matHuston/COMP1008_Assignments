@@ -30,7 +30,8 @@ public class Main {
         double dailyHigh;
         double dailyLow;
         int uvIndex;
- 
+        String weatherTips;
+
         /*
         STEP 2: Get input from the user using Scanner
         - Ask for each variable above
@@ -58,11 +59,6 @@ public class Main {
             System.out.print("Re-enter daily low temperature: ");
             dailyLow = input.nextDouble();
         }
-        while(uvIndex < 0 || uvIndex > 11){
-            System.out.println("Error: UV index must be between 0 and 11.");
-            System.out.print("Re-enter UV index: ");
-            uvIndex = input.nextInt();
-        }
  
         /*
         STEP 3: Typecasting (if needed)
@@ -70,7 +66,11 @@ public class Main {
         */
  
         // TODO: Apply typecasting where necessary
-
+        int highTemp = (int) dailyHigh;
+        int lowTemp = (int) dailyLow;
+        int windInt = Integer.parseInt(windSpeed);
+        int rainInt = Integer.parseInt(precipitation);
+ 
         /*
         STEP 4: Conditional statements
         - Example: 
@@ -80,7 +80,15 @@ public class Main {
         */
  
         // TODO: Write if, if-else, or nested if statements to display tips
-
+        
+        if (uvIndex >= 6) {
+            weatherTips += "\nHigh UV today; Don't forget sunscreen!";
+        } else if (rainInt >= 50) {
+            weatherTips += "\nRisk of rain today; Bring an umbrella!";
+        } else if (windInt >= 40) {
+            weatherTips += "\nWindy conditions; Secure loose items outdoors!";
+        }
+ 
         /*
         STEP 5: Create a fullReport String
         - Combine all user inputs and tips into one formatted sentence or paragraph
