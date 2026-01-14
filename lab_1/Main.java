@@ -24,6 +24,12 @@ public class Main {
         */
  
         // TODO: Declare your variables here
+        String weather;
+        String precipitation;
+        String windSpeed;
+        double dailyHigh;
+        double dailyLow;
+        int uvIndex;
  
         /*
         STEP 2: Get input from the user using Scanner
@@ -33,7 +39,10 @@ public class Main {
         */
  
         // TODO: Prompt user and read input
+
+
         // TODO: Use loops to validate high/low temperatures and UV index
+
  
         /*
         STEP 3: Typecasting (if needed)
@@ -41,7 +50,7 @@ public class Main {
         */
  
         // TODO: Apply typecasting where necessary
- 
+
         /*
         STEP 4: Conditional statements
         - Example: 
@@ -51,7 +60,7 @@ public class Main {
         */
  
         // TODO: Write if, if-else, or nested if statements to display tips
- 
+
         /*
         STEP 5: Create a fullReport String
         - Combine all user inputs and tips into one formatted sentence or paragraph
