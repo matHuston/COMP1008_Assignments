@@ -53,7 +53,16 @@ public class Main {
         uvIndex = input.nextInt();
 
         // TODO: Use loops to validate high/low temperatures and UV index
-
+        while(dailyLow > dailyHigh){
+            System.out.println("Error: Lowest temp cannot be higher than highest temp.");
+            System.out.print("Re-enter daily low temperature: ");
+            dailyLow = input.nextDouble();
+        }
+        while(uvIndex < 0 || uvIndex > 11){
+            System.out.println("Error: UV index must be between 0 and 11.");
+            System.out.print("Re-enter UV index: ");
+            uvIndex = input.nextInt();
+        }
  
         /*
         STEP 3: Typecasting (if needed)
