@@ -27,14 +27,18 @@ public class Lab4 {
         // ================================================
         // STEP 2: Print the array using Arrays.toString()
         // ================================================
-           
+            System.out.println(groceries.toString());
  
         // ================================================
         // STEP 3: Transfer all array items into an ArrayList
         // Use a loop to add each item
         // ================================================
         // TODO: Loop through the array and add items to groceryList
-     
+        ArrayList<String> groceryList = new ArrayList<>();
+        for(String food : groceries){
+            groceryList.add(food);
+        }
+        System.out.println(groceryList);
  
         // ================================================
         // STEP 4: Modify the ArrayList
