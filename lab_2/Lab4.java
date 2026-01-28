@@ -70,7 +70,7 @@ public class Lab4 {
         // ================================================
         // STEP 6: Print the final results
         // ================================================
-       
+        System.out.println("There are " + counter + " many vowels in the list.");
     }
 }
  
