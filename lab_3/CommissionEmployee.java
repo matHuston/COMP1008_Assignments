@@ -1,4 +1,3 @@
-package lab_3;
 public class CommissionEmployee extends Employee {
  
     private double grossSales;
@@ -37,9 +36,9 @@ public class CommissionEmployee extends Employee {
     // TODO 8: Override toString()
     @Override
     public String toString() {
-        return String.format("%s%n%s: $%, .2f; %s: %.2f", 
-            "commission employee", super.toString(),
-            "gross sales", getGrossSales(),
-            "commission rate", getCommissionRate());
+        return String.format("%s%n%s. %n%s $%,.2f. %n%s: %.2f", 
+            "Commission Employee", super.toString(),
+            "Gross Sales", getGrossSales(),
+            "Commission Rate", getCommissionRate());
     }
 }

@@ -1,4 +1,3 @@
-package lab_3;
 public abstract class Employee {
  
     private String firstName;
