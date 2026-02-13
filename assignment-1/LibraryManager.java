@@ -16,6 +16,7 @@ public class LibraryManager {
         boolean available = false;
         String availableInput = "";
 
+        // title with validation
         System.out.println("Enter book title:");
         title = scanner.nextLine();
         while (title == null || title.isEmpty()) {
@@ -23,19 +24,23 @@ public class LibraryManager {
             title = scanner.nextLine();
         }
 
+        // author with validation
         System.out.println("Enter book author:");
         author = scanner.nextLine();
         while (author == null || author.isEmpty()) {
             System.out.println("Author cannot be empty. Enter book author:");
             author = scanner.nextLine();
         }
-    
+        
+        // isbn with validation
         System.out.println("Enter book ISBN:");
         isbn = scanner.nextLine();
         while (isbn == null || (isbn.length() != 10 && isbn.length() != 13)) {
             System.out.println("ISBN must be 10 or 13 characters. Enter book ISBN:");
             isbn = scanner.nextLine();
         }
+
+        // availability with validation
         System.out.println("Is the book available? (true/false):");
         availableInput = scanner.nextLine();
         while (!availableInput.equalsIgnoreCase("true") && !availableInput.equalsIgnoreCase("false")) {
@@ -45,33 +50,53 @@ public class LibraryManager {
         if (availableInput.equalsIgnoreCase("true")) {
             available = true;
         }
-        library.add(new Book(title, author, isbn, available));
-    }
-    // Provide a menu-driven interface for the user:
-    
-    public static void libraryDisplay(Scanner scanner) {
 
-        // displaying books from search and filters
-        int bookCount = 0;
-        // 2. Display all books
-        for(Book book : library){
-            bookCount++;
-            System.out.println("~~~~ " + bookCount + " ~~~~");
-            book.displayInfo();
+        // create book object and add to library array list
+        library.add(new Book(title, author, isbn, available));
+
+    } // end of addBook method
+
+    // display books based on search and filters
+    public static void libraryDisplay(Scanner scanner, boolean displayAll, boolean displayAvailable) {
+
+        int bookCount = 0; // bookCount keeps track of result num of displayed books
+        int bookID = 0; // bookID keeps track of EVERY book
+
+        // case 2. Display all books
+        if(displayAll == true) {
+            for(Book book : library){
+                bookID++;
+                bookCount++;
+                System.out.println("~~~~ Result #" + bookCount + " ID: " + bookID + " ~~~~\n");
+                book.displayInfo();
+            }
+            displayAll = false;
         }
 
-        // 3. Display all available books
+        // case 3. Display all available books
+        if(displayAvailable == true) {
+            for(Book book : library){
+                if(book.isAvailable()){
+                bookID++;
+                bookCount++;
+                System.out.println("~~~~ Result #" + bookCount + " ID: " + bookID + " ~~~~\n");
+                book.displayInfo();
+                }
+            }
+            displayAvailable = false;
+        }
+        // case 4. Search books by author
 
-        // 4. Search books by author
+        // case 5. Check out a book (set available to false)
 
-        // 5. Check out a book (set available to false)
-
-        // 6. Return a book (set available to true)
+        // case 6. Return a book (set available to true)
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // libraryDisplay(scanner);
+        // running controls the menu
+        // displayAll runs the display all books for loop
+        // displayAvailable runs the display all available books for loop
         boolean running = true;
         System.out.println("Display:");
         while (running) {
@@ -88,11 +113,12 @@ public class LibraryManager {
                     addBook(scanner);
                     break;
                 case "2":
-                    libraryDisplay(scanner);
                     // display all books
+                    libraryDisplay(scanner, true, false);
                     break;
                 case "3":
                     // display available books
+                    libraryDisplay(scanner, false, true);
                     break;
                 case "4":
                     // search by author
