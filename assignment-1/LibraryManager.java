@@ -58,7 +58,7 @@ public class LibraryManager {
 
     // display books based on search and filters 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public static void libraryDisplay(Scanner scanner, boolean displayAll, boolean displayAvailable, boolean displayByAuthor, boolean checkoutBook, boolean returnBook) {
+    public static void libraryDisplay(Scanner scanner, boolean displayAll, boolean displayAvailable, boolean displayByAuthor, boolean checkoutBook, boolean returnBook, boolean removeBook) {
 
         int bookCount = 0; // bookCount keeps track of result num of displayed books
         int bookID = 0; // bookID keeps track of EVERY book
@@ -78,8 +78,8 @@ public class LibraryManager {
         // case 3. Display all available books
         if(displayAvailable == true) {
             for(Book book : library){
+                bookID++;
                 if(book.isAvailable()){
-                    bookID++;
                     bookCount++;
                     System.out.println("\n~~~~ Result #" + bookCount + " ID: " + bookID + " ~~~~");
                     book.displayInfo();
@@ -93,9 +93,9 @@ public class LibraryManager {
         if(displayByAuthor == true) {
             System.out.println("Enter author name:");
             String authorName = scanner.nextLine();
-            for(Book book : library){
+            for(Book book : library){ 
+                bookID++;
                 if(book.getAuthor().equalsIgnoreCase(authorName)){
-                    bookID++;
                     bookCount++;
                     System.out.println("\n~~~~ Result #" + bookCount + " ID: " + bookID + " ~~~~");
                     book.displayInfo();
@@ -117,7 +117,7 @@ public class LibraryManager {
                 checkoutBook = false;
             }
             // validate book ID
-            // make sure checkout ID isnt larger than the library size and isn't 0
+            // make sure checkoutID isnt larger than the library size and isn't 0
             if(checkoutID > 0 && checkoutID <= library.size()) {
                 Book bookToCheckout = library.get(checkoutID - 1);
                 //set availbility to false if it can be checked out, otherwise tell user that book is already checked out
@@ -145,7 +145,7 @@ public class LibraryManager {
                 returnBook = false;
             }
             // validate book ID
-            // make sure return ID isnt larger than the library size and isn't 0
+            // make sure returnID isnt larger than the library size and isn't 0
             if(returnID > 0 && returnID <= library.size()) {
                 Book bookToReturn = library.get(returnID - 1);
                 //set availbility to true if it can be returned, otherwise tell user that book is already available
@@ -160,7 +160,32 @@ public class LibraryManager {
             }
             returnBook = false;
         } // end case 6
-    }
+
+        // case 7. Remove a book
+        if(removeBook == true) {
+            System.out.println("Enter book ID to remove:");
+            int removeID = 0;
+            // try to get scanner input and parse to int, if a letter/invalid char is input, catch exception
+            try {
+                removeID = Integer.parseInt(scanner.nextLine());
+            } 
+            catch (NumberFormatException e) {
+                removeBook = false;
+            }
+            // validate book ID
+            // make sure removeID isnt larger than the library size and isn't 0
+            if(removeID > 0 && removeID <= library.size()) {
+                Book bookToRemove = library.get(removeID - 1);
+                //remove the book from the library
+                library.remove(bookToRemove);
+                System.out.println("Book removed successfully.");
+            } else {
+                System.out.println("Invalid book ID.");
+            }
+            removeBook = false;
+        } // end case 7
+        
+    } // end of libraryDisplay method
 
     // menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static void main(String[] args) {
@@ -177,7 +202,8 @@ public class LibraryManager {
             System.out.println("4. Search books by author");
             System.out.println("5. Check out a book");
             System.out.println("6. Return a book");
-            System.out.println("7. Exit");
+            System.out.println("7. Remove a book");
+            System.out.println("8. Exit");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
@@ -185,30 +211,34 @@ public class LibraryManager {
                     break;
                 case "2":
                     // display all books
-                    libraryDisplay(scanner, true, false, false, false, false);
+                    libraryDisplay(scanner, true, false, false, false, false, false);
                     break;
                 case "3":
                     // display available books
-                    libraryDisplay(scanner, false, true, false, false, false);
+                    libraryDisplay(scanner, false, true, false, false, false, false);
                     break;
                 case "4":
                     // search by author
-                    libraryDisplay(scanner, false, false, true, false, false);
+                    libraryDisplay(scanner, false, false, true, false, false, false);
                     break;
                 case "5":
                     // check out a book
-                    libraryDisplay(scanner, false, false, false, true, false);
+                    libraryDisplay(scanner, false, false, false, true, false, false);
                     break;
                 case "6":
                     // return a book
-                    libraryDisplay(scanner, false, false, false, false, true);
+                    libraryDisplay(scanner, false, false, false, false, true, false);
                     break;
                 case "7":
+                    // remove a book
+                    libraryDisplay(scanner, false, false, false, false, false, true);
+                    break;
+                case "8":
                     running = false;
                     System.out.println("Exiting the program.");
                     break;
                 default:
-                    System.out.println("Invalid choice. Enter a number between 1 and 7.");
+                    System.out.println("Invalid choice. Enter a number between 1 and 8.");
             } // end switch cases
         } // end while loop
         scanner.close();
