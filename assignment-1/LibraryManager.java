@@ -2,7 +2,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// 2. Main Program — LibraryManager.java
 public class LibraryManager {
 
     // library array list to store book objects
@@ -62,7 +61,7 @@ public class LibraryManager {
     } // end of addBook method
 
     // display books based on search and filters 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static void libraryDisplay(Scanner scanner, boolean displayAll, boolean displayAvailable, boolean displayByAuthor, boolean checkoutBook, boolean returnBook, boolean removeBook) {
 
         int bookCount = 0; // bookCount keeps track of result num of displayed books
@@ -211,7 +210,8 @@ public class LibraryManager {
         
     } // end of libraryDisplay method
 
-    // menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // menu 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         // running controls the menu
@@ -271,14 +271,4 @@ public class LibraryManager {
 
 } // end of LibraryManager class
 
-
-// 3. Menu Functionality (Control & Iteration)
-
-// Use loops to continuously show the menu until the user chooses Exit
-// Use if-else or switch to handle menu options
-// Validate all user input using loops and conditionals
-// 4. Additional Features (Arrays & ArrayLists)
-// When displaying books, show the count of available vs checked-out books
-// Optional: Sort the ArrayList by title before displaying
-
-
+// end of program
