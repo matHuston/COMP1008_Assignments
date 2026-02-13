@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class LibraryManager {
 
     // Use an ArrayList to store multiple Book objects
-    ArrayList<Book> library = new ArrayList<>();
+    static ArrayList<Book> library = new ArrayList<>();
     
     // add books to the library
     public static void addBook(Scanner scanner) {
@@ -45,17 +45,20 @@ public class LibraryManager {
         if (availableInput.equalsIgnoreCase("true")) {
             available = true;
         }
+        library.add(new Book(title, author, isbn, available));
     }
     // Provide a menu-driven interface for the user:
     
     public static void libraryDisplay(Scanner scanner) {
 
         // displaying books from search and filters
-
+        int bookCount = 0;
         // 2. Display all books
         for(Book book : library){
-                System.out.println(book.getTitle() + " by " + book.getAuthor() + " (ISBN: " + book.getIsbn() + ") - " + (book.isAvailable() ? "Available" : "Checked out"));
-            }
+            bookCount++;
+            System.out.println("~~~~ " + bookCount + " ~~~~");
+            book.displayInfo();
+        }
 
         // 3. Display all available books
 
@@ -85,6 +88,7 @@ public class LibraryManager {
                     addBook(scanner);
                     break;
                 case "2":
+                    libraryDisplay(scanner);
                     // display all books
                     break;
                 case "3":
