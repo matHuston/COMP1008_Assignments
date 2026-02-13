@@ -7,13 +7,14 @@ public class LibraryManager {
 
     // library array list to store book objects
     static ArrayList<Book> library = new ArrayList<>();
+    static int availableCount = 0;
+    static int checkedOutCount = 0;
     
     // add books to the library
-    public static void addBook(Scanner scanner) {
+    public static void addBook(Scanner scanner, boolean available) {
         String title = "";
         String author = "";
         String isbn = "";
-        boolean available = false;
         String availableInput = "";
 
         // title with validation
@@ -49,6 +50,10 @@ public class LibraryManager {
         }
         if (availableInput.equalsIgnoreCase("true")) {
             available = true;
+            availableCount++;
+        } else {
+            available = false;
+            checkedOutCount++;
         }
 
         // create book object and add to library array list
@@ -65,6 +70,9 @@ public class LibraryManager {
 
         // case 2. Display all books
         if(displayAll == true) {
+            System.out.print("\n");
+            System.out.println("========== Library Collection ==========");
+            System.out.println("Available: " + availableCount + " | Checked Out: " + checkedOutCount);
             for(Book book : library){
                 bookID++;
                 bookCount++;
@@ -77,6 +85,9 @@ public class LibraryManager {
 
         // case 3. Display all available books
         if(displayAvailable == true) {
+            System.out.print("\n");
+            System.out.println("========== Available Books =============");
+            System.out.println("Available: " + availableCount + " | Checked Out: " + checkedOutCount);
             for(Book book : library){
                 bookID++;
                 if(book.isAvailable()){
@@ -91,8 +102,11 @@ public class LibraryManager {
 
         // case 4. Search books by author
         if(displayByAuthor == true) {
+            System.out.print("\n");
+            System.out.println("========== Author Search ===============");
             System.out.println("Enter author name:");
             String authorName = scanner.nextLine();
+            System.out.println("========== Search Results ==============");
             for(Book book : library){ 
                 bookID++;
                 if(book.getAuthor().equalsIgnoreCase(authorName)){
@@ -123,6 +137,8 @@ public class LibraryManager {
                 //set availbility to false if it can be checked out, otherwise tell user that book is already checked out
                 if(bookToCheckout.isAvailable()) {
                     bookToCheckout.setAvailable(false);
+                    availableCount--;
+                    checkedOutCount++;
                     System.out.println("Book checked out successfully.");
                 } else {
                     System.out.println("Book is already checked out.");
@@ -151,6 +167,8 @@ public class LibraryManager {
                 //set availbility to true if it can be returned, otherwise tell user that book is already available
                 if(!bookToReturn.isAvailable()) {
                     bookToReturn.setAvailable(true);
+                    availableCount++;
+                    checkedOutCount--;
                     System.out.println("Book returned successfully.");
                 } else {
                     System.out.println("Book is already available.");
@@ -176,8 +194,14 @@ public class LibraryManager {
             // make sure removeID isnt larger than the library size and isn't 0
             if(removeID > 0 && removeID <= library.size()) {
                 Book bookToRemove = library.get(removeID - 1);
-                //remove the book from the library
+                // remove the book from the library
                 library.remove(bookToRemove);
+                // update available and checked out counts based on the availability of the removed book
+                if(bookToRemove.isAvailable()) {
+                    availableCount--;
+                } else {
+                    checkedOutCount--;
+                }
                 System.out.println("Book removed successfully.");
             } else {
                 System.out.println("Invalid book ID.");
@@ -194,8 +218,9 @@ public class LibraryManager {
         // displayAll runs the display all books for loop
         // displayAvailable runs the display all available books for loop
         boolean running = true;
-        System.out.println("Display:");
         while (running) {
+            System.out.print("\n");
+            System.out.println("========== Library Manager Menu ========");
             System.out.println("1. Add a new book");
             System.out.println("2. Display all books");
             System.out.println("3. Display all available books");
@@ -207,7 +232,7 @@ public class LibraryManager {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                    addBook(scanner);
+                    addBook(scanner, false);
                     break;
                 case "2":
                     // display all books
