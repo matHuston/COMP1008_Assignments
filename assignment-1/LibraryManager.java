@@ -7,12 +7,14 @@
 // Requirements
 
 // Create a Book class (Encapsulation & Advanced Class Components)
+// Private fields: title (String), author (String), isbn (String), available (boolean)
 class Book {
     private String title;
     private String author;
     private String isbn;
     private boolean available;
-    
+
+    // Default constructor and parameterized constructor
     // Default constructor
     public Book() {
         this.title = "";
@@ -30,12 +32,53 @@ class Book {
     }
 
     // Getters and setters with validation
-// Private fields: title (String), author (String), isbn (String), available (boolean)
-// Default constructor and parameterized constructor
-// Getters and setters with validation:
-// title and author cannot be empty
-// isbn must follow a simple pattern (e.g., 10 or 13 characters)
-// displayInfo() method to print book details
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        // title should not be null or empty
+        if (title != null && !title.isEmpty()) {
+            this.title = title;
+        }
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        // author should not be null or empty
+        if (author != null && !author.isEmpty()) {
+            this.author = author;
+        }
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+    public void setIsbn(String isbn) {
+        // isbn must follow a simple pattern (e.g., 10 or 13 characters)
+        if (isbn != null && (isbn.length() == 10 || isbn.length() == 13)) {
+            this.isbn = isbn;
+        }
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+    // displayInfo() method to print book details
+    public void displayInfo() {
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("ISBN: " + isbn);
+        System.out.println("Status: " + (available ? "Available" : "Checked Out"));
+    }
+}
+    
+
+
 // 2. Main Program — LibraryManager.java
 
 // Use an ArrayList to store multiple Book objects
